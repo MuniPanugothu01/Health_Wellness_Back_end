@@ -8,7 +8,7 @@ dotenv.config();
 // db.js file
 const { connectDB } = require("./configs/db.js");
 connectDB();
-// define the variable cors, cors is used to connect the frontend to backend
+//cors is used to connect the frontend to backend
 // allow multiple origins
 const allowedOrigins = ["http://localhost:5173"];
 
