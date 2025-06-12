@@ -12,6 +12,6 @@ sellerRouter.post("/login", sellerLogin);
 sellerRouter.get("/is-auth", authSeller, isSellerAuth);
 sellerRouter.get("/logout", sellerLogout);
 
-module.exports={
-    sellerRouter,
-}
+module.exports = {
+  sellerRouter,
+};
