@@ -2,6 +2,11 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const cors = require("cors");
 const app = express();
+// Required to parse JSON bodies
+app.use(express.json());
+app.use(express.json()); // For parsing JSON request bodies
+app.use(cookieParser()); // Required to read cookies
+
 // dotenv file
 const dotenv = require("dotenv");
 dotenv.config();
@@ -21,7 +26,7 @@ app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.get("/", (req, res) => {
   res.send("api is working");
 });
-app.use('/api/user',userRouter)
+app.use("/api/user", userRouter);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
