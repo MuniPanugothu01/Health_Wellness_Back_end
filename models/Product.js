@@ -1,7 +1,7 @@
 // models/User.js
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -12,6 +12,8 @@ const userSchema = new mongoose.Schema({
   },
 }); // {minimize:false}
 
-const User = mongoose.model("user", userSchema); // <-- collection name will be "users"
+const Product = mongoose.model.product || mongoose.model("product", productSchema);
 
-module.exports = User;
+module.exports = {
+  Product,
+};
