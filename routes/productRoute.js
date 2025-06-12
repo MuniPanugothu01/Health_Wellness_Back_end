@@ -9,7 +9,7 @@ const {
 } = require("../controllers/productController.js");
 const productRouter = express.Router();
 
-productRouter.post("/add", upload.array("images"), authSeller, addProduct);
+productRouter.post("/add", upload.array(["images"]), authSeller, addProduct);
 
 
 productRouter.get("/list", ProductList);
