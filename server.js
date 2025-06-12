@@ -17,6 +17,7 @@ const { sellerRouter } = require("./routes/sellerRoute.js");
 const { connectCloudinary } = require("./configs/Cloudinary.js");
 const { productRouter } = require("./routes/productRoute.js");
 const { cartRouter } = require("./routes/cartRoute.js");
+const { addressRouter } = require("./routes/addressRoute.js");
 connectDB();
 connectCloudinary();
 
@@ -36,7 +37,7 @@ app.use("/api/user", userRouter);
 app.use("/api/seller", sellerRouter);
 app.use("/api/product", productRouter);
 app.use('/api/cart', cartRouter);
-
+app.use('/api/address', addressRouter)
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
