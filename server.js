@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 // Required to parse JSON bodies
-app.use(express.json());
 app.use(express.json()); // For parsing JSON request bodies
 app.use(cookieParser()); // Required to read cookies
 

@@ -4,6 +4,15 @@ const jwt = require("jsonwebtoken");
 const sellerLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    // Optional: Debug log to verify inputs and environment values
+    console.log("Login attempt:", { email, password });
+    console.log(
+      "Expected:",
+      process.env.SELLER_EMAIL,
+      process.env.SELLER_PASSWORD
+    );
+
     if (
       password === process.env.SELLER_PASSWORD &&
       email === process.env.SELLER_EMAIL
