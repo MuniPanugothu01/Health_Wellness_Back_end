@@ -15,6 +15,7 @@ const { connectDB } = require("./configs/db.js");
 const { userRouter } = require("./routes/userRoute.js");
 const { sellerRouter } = require("./routes/sellerRoute.js");
 const { connectCloudinary } = require("./configs/Cloudinary.js");
+const { productRouter } = require("./routes/productRoute.js");
 connectDB();
 connectCloudinary();
 
@@ -32,6 +33,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/user", userRouter);
 app.use("/api/seller", sellerRouter);
+app.use("/api/product", productRouter);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
