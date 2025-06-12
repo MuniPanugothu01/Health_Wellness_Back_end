@@ -14,7 +14,10 @@ dotenv.config();
 const { connectDB } = require("./configs/db.js");
 const { userRouter } = require("./routes/userRoute.js");
 const { sellerRouter } = require("./routes/sellerRoute.js");
+const { connectCloudinary } = require("./configs/Cloudinary.js");
 connectDB();
+connectCloudinary();
+
 //cors is used to connect the frontend to backend
 // allow multiple origins
 const allowedOrigins = ["http://localhost:5173"];
