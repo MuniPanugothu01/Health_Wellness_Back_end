@@ -1,6 +1,6 @@
 const Product = require("../models/Product.js");
 const Order = require("../models/Order.js");
-const { use } = require("react");
+
 // palce Order COD : /api.order/COD
 const placrOrderCOD = async (req, res) => {
   try {
@@ -38,7 +38,8 @@ const getUserOrders = async (req, res) => {
       userId,
       $or: [{ paymentType: "COD" }, { isPaid: true }],
     })
-      .populate("items.product address").sort({ createdAt: -1 })
+      .populate("items.product address")
+      .sort({ createdAt: -1 })
       .sort({ createdAt: -1 });
     res.json({ success: true, orders });
   } catch (error) {
@@ -51,11 +52,9 @@ const getUserOrders = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
   try {
-   
     const orders = await Order.find({
       $or: [{ paymentType: "COD" }, { isPaid: true }],
-    })
-      .populate("items.product address")
+    }).populate("items.product address");
     res.json({ success: true, orders });
   } catch (error) {
     console.log(error.message);
@@ -64,5 +63,7 @@ const getAllOrders = async (req, res) => {
 };
 
 module.exports = {
-  placrOrderCOD, getUserOrders ,getAllOrders,
+  placrOrderCOD,
+  getUserOrders,
+  getAllOrders,
 };
