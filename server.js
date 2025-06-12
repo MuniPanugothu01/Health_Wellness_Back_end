@@ -13,6 +13,7 @@ dotenv.config();
 // db.js file
 const { connectDB } = require("./configs/db.js");
 const { userRouter } = require("./routes/userRoute.js");
+const { sellerRouter } = require("./routes/sellerRoute.js");
 connectDB();
 //cors is used to connect the frontend to backend
 // allow multiple origins
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
   res.send("api is working");
 });
 app.use("/api/user", userRouter);
+app.use("/api/seller", sellerRouter);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

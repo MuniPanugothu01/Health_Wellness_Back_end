@@ -30,18 +30,31 @@ const sellerLogin = async (req, res) => {
 // Check if seller isAuth : /api/seller/is-auth
 const isSellerAuth = async (req, res) => {
   try {
-    
-    const user = await User.findById(req.userId).select("-password");
-    return res.json({ success: true, user });
+    return res.json({ success: true });
   } catch (err) {
     console.log(err.message);
     res.json({ success: false, message: err.message });
   }
 };
 
+// Logout seller : /api/seller/logout
+const sellerLogout = async (req, res) => {
+  try {
+    res.clearCookie("sellertoken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    });
 
-
+    return res.json({ success: true, message: "Logged out successfully" });
+  } catch (err) {
+    console.log(err.message);
+    res.json({ success: false, message: err.message });
+  }
+};
 
 module.exports = {
-  sellerLogin,isSellerAuth
+  sellerLogin,
+  isSellerAuth,
+  sellerLogout,
 };
