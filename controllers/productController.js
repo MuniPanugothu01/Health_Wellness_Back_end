@@ -9,6 +9,8 @@ const addProduct = async (req, res) => {
     console.log("product controller", req.body);
     const { name, description, category, price, offerPrice } = req.body;
     let productData = req.body.productData;
+    console.log(productData, "productData");
+
     const images = req.files;
     let imagesUrl = await Promise.all(
       images.map(async (item) => {
@@ -21,15 +23,15 @@ const addProduct = async (req, res) => {
     console.log("Images URL:", imagesUrl);
 
     const product = await new Product({
-    name: name,
-    description: description,
-    price: price,
-    offerPrice: offerPrice,
-    image: imagesUrl, 
-    category: category, 
-    })
-    product.save()
-    res.json({ success: true, message: "Product added" , product});
+      name: name,
+      description: description,
+      price: price,
+      offerPrice: offerPrice,
+      images: imagesUrl,
+      category: category,
+    });
+    product.save();
+    res.json({ success: true, message: "Product added", product });
   } catch (error) {
     console.log("Error in addProduct:", error.message);
     res.json({ success: false, message: error.message });
