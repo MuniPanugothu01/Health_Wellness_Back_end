@@ -8,7 +8,7 @@ const connectDB = async () => {
     );
     await mongoose.connect(`${process.env.MONGO_DB_URL}`);
   } catch (err) {
-    console.err(err.message);
+    console.log(err.message);
   }
 };
 module.exports = {
