@@ -1,16 +1,15 @@
 // different controller function for adding products for displaying list of products and for modifying the stock
 
-const { Product } = require("../models/Product.js");
-
 const cloudinary = require("cloudinary").v2;
-
+const Product = require("../models/Product"); // ✅ Correct model import
 // add Product : /api/product/add
+
 const addProduct = async (req, res) => {
   try {
-    let productData = JSON.parse(req.body.productData);
-
+    console.log("product controller", req.body);
+    const { name, description, category, price, offerPrice } = req.body;
+    let productData = req.body.productData;
     const images = req.files;
-
     let imagesUrl = await Promise.all(
       images.map(async (item) => {
         let result = await cloudinary.uploader.upload(item.path, {
@@ -19,12 +18,20 @@ const addProduct = async (req, res) => {
         return result.secure_url;
       })
     );
+    console.log("Images URL:", imagesUrl);
 
-    await Product.create({ ...productData, image: imagesUrl });
-
-    res.json({ success: true, message: "product Added" });
+    const product = await new Product({
+    name: name,
+    description: description,
+    price: price,
+    offerPrice: offerPrice,
+    image: imagesUrl, 
+    category: category, 
+    })
+    product.save()
+    res.json({ success: true, message: "Product added" , product});
   } catch (error) {
-    console.log(error.message);
+    console.log("Error in addProduct:", error.message);
     res.json({ success: false, message: error.message });
   }
 };
