@@ -7,10 +7,10 @@ const Product = require("../models/Product"); // ✅ Correct model import
 const addProduct = async (req, res) => {
   try {
     console.log("product controller", req.body);
-    const { name, description, category, price, offerPrice } = req.body;
-    let productData = req.body.productData;
-    console.log(productData, "productData");
-
+    const { name, description, category, price, offerPrice } = JSON.parse(req.body.productData);
+  
+  // const { name, description, category, price, offerPrice } = req.body
+  
     const images = req.files;
     let imagesUrl = await Promise.all(
       images.map(async (item) => {
@@ -20,14 +20,14 @@ const addProduct = async (req, res) => {
         return result.secure_url;
       })
     );
-    console.log("Images URL:", imagesUrl);
+    console.log("Images URLmmmm:", imagesUrl);
 
     const product = await new Product({
       name: name,
       description: description,
       price: price,
       offerPrice: offerPrice,
-      images: imagesUrl,
+      image:imagesUrl[0],
       category: category,
     });
     product.save();
