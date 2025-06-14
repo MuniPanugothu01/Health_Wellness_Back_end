@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true, ref: "user" },
-    itmes: [
+    items: [
+      // ✅ corrected spelling
       {
         product: { type: String, required: true, ref: "product" },
         quantity: { type: Number, required: true },
